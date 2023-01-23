@@ -11,6 +11,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Classwork {
+    //^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$
+    //^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$
+    //^((25[0-5]|(2[0-4]|1[0-9]|[1-9]|)[0-9])(\.(?!$)|$)){4}$
 
     public static void main(String[] args) {
 //        filterUsingRegex();
@@ -23,6 +26,7 @@ public class Classwork {
 
         List<File> files = searchFiles(new File("src"), ".java");
         files.forEach(System.out::println);
+
     }
 
     private static void searchFiles(File root, List<File> list, String ext, int n) {
