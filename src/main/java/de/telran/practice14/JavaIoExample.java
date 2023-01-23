@@ -8,27 +8,30 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.ArrayList;
 
 public class JavaIoExample {
     public static void main(String[] args) throws IOException {
 //        simpleFileExample();
-//        fileTreeWalk(new File("./"));
+        fileTreeWalk(new File("D:"));
 //        directoriesExample();
 
 
 //        simpleRead();
 //        readingMethodComparison();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("example/2.txt"))) {
-            String line;
-            int counter = 0;
-            while ((line = br.readLine()) != null && counter < 1000) {
-                System.out.println(line);
-                counter++;
-            }
-        }
+//        try (BufferedReader br = new BufferedReader(new FileReader("example/2.txt"))) {
+//            String line;
+//            int counter = 0;
+//            while ((line = br.readLine()) != null && counter < 1000) {
+//                System.out.println(line);
+//                counter++;
+//            }
+//        }
 
     }
 
@@ -93,9 +96,10 @@ public class JavaIoExample {
 
     private static void fileTreeWalk(File root) {
        if (root.isFile()) {
+
            System.out.println("File --> " + root.getPath());
        } else {
-           System.out.println("Directory --> " + root.getPath());
+//           System.out.println("Directory --> " + root.getPath());
 //           File[] files = root.listFiles();
 //           File[] files = root.listFiles(new FileFilter() {
 //               @Override
@@ -104,7 +108,8 @@ public class JavaIoExample {
 //               }
 //           });
 
-           File[] files = root.listFiles(f -> !f.isHidden() && !f.getName().contains(".idea"));
+//           File[] files = root.listFiles(f -> !f.isHidden() && !f.getName().contains(".idea"));
+           File[] files = root.listFiles(f -> f.isDirectory() || f.getName().endsWith(".txt"));
 
            for (File file : files) {
                fileTreeWalk(file);
