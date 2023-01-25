@@ -9,11 +9,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Scanner;
 
 public class Classwork {
 
     //Jackson, Gson
     public static void main(String[] args) {
+
+        StringBuilder sb = new StringBuilder();
+        try (Scanner sc = new Scanner(new FileInputStream("cats/murzik.json"))) {
+            sc.useDelimiter("%%%%");
+            sb.append(sc.next());
+//            while (sc.hasNext()) {
+//                sb.append(sc.nextLine());
+//
+//            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        System.out.println(sb);
 
 
 //        javaSerialization();
@@ -29,17 +44,17 @@ public class Classwork {
 //            System.out.println(e);
 //        }
 
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader fileReader = new BufferedReader(new FileReader("cats/murzik.json"))) {
-            fileReader.lines()
-                    .forEach(sb::append);
-
-//            Cat murzik = gson.fromJson(sb.toString(), Cat.class);
-
-//            System.out.println(murzik);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+//        StringBuilder sb = new StringBuilder();
+//        try (BufferedReader fileReader = new BufferedReader(new FileReader("cats/murzik.json"))) {
+//            fileReader.lines()
+//                    .forEach(sb::append);
+//
+////            Cat murzik = gson.fromJson(sb.toString(), Cat.class);
+//
+////            System.out.println(murzik);
+//        } catch (IOException e) {
+//            System.out.println(e);
+//        }
 
 
 
