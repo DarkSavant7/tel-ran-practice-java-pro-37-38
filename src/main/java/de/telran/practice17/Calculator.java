@@ -4,19 +4,19 @@ import java.io.FileNotFoundException;
 
 public class Calculator {
     // https://junit.org/junit5/
-    public int add(int a, int b) {
+    public Integer add(Integer a, Integer b) {
         return a + b;
     }
 
-    public int sub(int a, int b) {
+    public Integer sub(Integer a, Integer b) {
         return a - b;
     }
 
-    public int mul(int a, int b) {
+    public Integer mul(Integer a, Integer b) {
         return a * b;
     }
 
-    public int div(int a, int b) {
+    public Integer div(Integer a, Integer b) {
         return a / b;
     }
 
