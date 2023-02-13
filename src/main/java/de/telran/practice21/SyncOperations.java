@@ -296,6 +296,7 @@ public class SyncOperations {
 
             // ожидаем завершения всеми потоками первой фазы
             phaser.arriveAndAwaitAdvance();
+//            phaser.
             System.out.println("Phase " + curPhase + " completed");
 
 
@@ -307,6 +308,8 @@ public class SyncOperations {
 
             // снимаем основной поток исполнения с регистрации
             phaser.arriveAndDeregister();
+
+            Thread.sleep(2000);
 
             if (phaser.isTerminated())
                 System.out.println("Phaser is terminated");
@@ -347,6 +350,7 @@ public class SyncOperations {
 
             System.out.println("Thread " + name + " is starting third phase");
             phaser.arriveAndAwaitAdvance();
+            phaser.arriveAndDeregister();
         }
     }
 }

@@ -128,6 +128,8 @@ public class Sync {
                     Thread.sleep((long) (300 * j + 400 * Math.random()));
                     System.out.printf("Car #%d on the start line\n", j);
                     barrier.await();
+//                    barrier.getNumberWaiting();
+//                    barrier.getParties();
                     System.out.printf("Car #%d riding\n", j);
                     Thread.sleep((long) (300 * j + 400 * Math.random()));
                     System.out.printf("Car #%d finished\n", j);
@@ -142,7 +144,7 @@ public class Sync {
 
     private static void semaphoreExample() {
         //        Semaphore semaphore = new Semaphore(2);
-        Semaphore semaphore = new Semaphore(2, true);
+        Semaphore semaphore = new Semaphore(3, true);
         for (int i = 0; i < 10; i++) {
             int j = i + 1;
             new Thread(() -> {
@@ -190,8 +192,8 @@ public class Sync {
 
     private static void simpleCountDownLathExample() {
         int threadCount = 10;
-//        CountDownLatch cdl = new CountDownLatch(threadCount / 2);
-        CountDownLatch cdl = new CountDownLatch(threadCount + 1);
+        CountDownLatch cdl = new CountDownLatch(threadCount / 2);
+//        CountDownLatch cdl = new CountDownLatch(threadCount + 1);
         System.out.println("Begin");
 
         for (int i = 0; i < threadCount; i++) {
@@ -210,8 +212,8 @@ public class Sync {
         }
 
         try {
-//            cdl.await();
-            cdl.await(3, TimeUnit.SECONDS);
+            cdl.await();
+//            cdl.await(3, TimeUnit.SECONDS);
             System.out.println("ALL JOBS DONE!!!");
         } catch (InterruptedException e) {
             e.printStackTrace();
