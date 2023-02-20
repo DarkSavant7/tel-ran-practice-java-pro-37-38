@@ -15,18 +15,20 @@ public class DatabaseExample {
     private static String exampleCall = "{call do_something_prc(?,?,?)}";
 
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         try {
             connect();
             createDB();
 //            dropTable();
-            simpleInsert();
+//            simpleInsert();
 //            simpleDelete();
 //            simpleUpdate();
 //            simpleRead();
 //            notReallyCorrectInsert("Petya Petrov", 75);
 //            notReallyCorrectInsert("Sidor Sidorov", 75);
-//            notReallyCorrectInsert("Sidor Sidorov, 75); drop table students;", 75);
+//            notReallyCorrectInsert("Sidor Sidorov', 75); delete from students;", 75);
+//            preparedInsert("Sidor Sidorov", 75);
+//            preparedInsert("Sidor Sidorov', 75); delete from students;", 75);
 //            massInsertExample();
             batchInsertExample();
         } catch (SQLException e) {
@@ -58,6 +60,7 @@ public class DatabaseExample {
 //            if (i == 15) throw new RuntimeException();
         }
 //            connection.commit();
+//        connection.rollback();
         connection.setAutoCommit(true);
         System.out.println(System.currentTimeMillis() - start);
     }
@@ -72,11 +75,12 @@ public class DatabaseExample {
         statement.executeUpdate("insert into students (name, score) values (\'" + name + "\', " + score + ");");
     }
 
-    private static void simpleRead() throws SQLException{
+    private static void simpleRead() throws SQLException {
         try (ResultSet resultSet = statement.executeQuery("select name, score from students;")) {
-
             while (resultSet.next()) {
-                System.out.printf("Student: %s score %s\n", resultSet.getString(1), resultSet.getInt("score"));
+                System.out.printf("Student: %s score %s\n",
+                        resultSet.getString(1),
+                        resultSet.getInt("score"));
             }
         }
     }
@@ -90,7 +94,8 @@ public class DatabaseExample {
     }
 
     private static void simpleInsert() throws SQLException {
-        int insertedRows = statement.executeUpdate("insert into students (name, score) values ('Vasya Pupkin', 80), ('Kolya Morzhov', 90), ('Vitaly Petrov', 100);");
+        int insertedRows = statement
+                .executeUpdate("insert into students (name, score) values ('Vasya Pupkin', 80), ('Kolya Morzhov', 90), ('Vitaly Petrov', 100);");
         System.out.println(insertedRows);
     }
 
@@ -99,16 +104,16 @@ public class DatabaseExample {
     }
 
     private static void createDB() throws SQLException {
+        statement = connection.createStatement();
         statement.execute("create table if not exists students (id integer primary key autoincrement, name text, score integer);");
         ps = connection.prepareStatement(insertStatement);
+//        CallableStatement cs = connection.prepareCall(exampleCall);
     }
 
     private static void connect() throws SQLException {
         //Раньше требовалось проинициализировать драйвер
 //        Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:db/example.db");
-        statement = connection.createStatement();
-//        CallableStatement cs = connection.prepareCall(exampleCall);
     }
 
     private static void disconnect() {

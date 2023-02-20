@@ -15,8 +15,19 @@ public class PostgresExample {
     private static String insertStatement = "insert into students (name, score) values (?, ?);";
     private static String exampleCall = "{call do_something_prc(?,?,?)}";
 
+    static {
+        System.out.println("Static");
+    }
 
-    public static void main(String[] args)  {
+    {
+        System.out.println("njdfndfjbv");
+    }
+
+    {
+        System.out.println("njdfndfjbv");
+    }
+
+    public static void main(String[] args) {
         try {
             connect();
             createDB();
@@ -73,7 +84,7 @@ public class PostgresExample {
         statement.executeUpdate("insert into students (name, score) values (\'" + name + "\', " + score + ");");
     }
 
-    private static void simpleRead() throws SQLException{
+    private static void simpleRead() throws SQLException {
         try (ResultSet resultSet = statement.executeQuery("select name, score from students;")) {
 
             while (resultSet.next()) {
