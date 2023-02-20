@@ -1,0 +1,22 @@
+server:
+  port: 8189
+  servlet:
+    context-path: /tel
+spring:
+  output:
+    ansi:
+      enabled: always
+  main:
+    banner-mode: console
+  application:
+    name: tel-ran-test
+springdoc:
+  api-docs:
+    path: "/api-docs"
+  swagger-ui:
+    path: "/swagger-ui"
+    disable-swagger-default-url: true
+    enabled: true
+    operationsSorter: alpha
+    tagsSorter: alpha
+    doc-expansion: none
