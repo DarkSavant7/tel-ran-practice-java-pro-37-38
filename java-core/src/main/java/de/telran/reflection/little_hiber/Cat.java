@@ -14,6 +14,10 @@ public class Cat {
     @HField
     private String color;
 
+    public Cat( String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
     public Cat(int id, String name, String color) {
         this.id = id;
         this.name = name;

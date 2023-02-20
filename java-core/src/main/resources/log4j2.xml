@@ -15,7 +15,7 @@
         </File>
 
         <Console name="STDOUT" target="SYSTEM_OUT">
-            <PatternLayout pattern="%-5p %d{yyyy.MM.dd_HH:mm:ss} blah blah  [%t] ____ (%F:%L) - %m%n" />
+            <PatternLayout pattern="%-10p %d{yyyy.MM.dd_HH:mm:ss} blah blah  [%t] ____ (%F:%L) - %m%n" />
         </Console>
     </Appenders>
 
@@ -24,10 +24,12 @@
             <AppenderRef ref="FILE1"/>
             <AppenderRef ref="STDOUT" />
         </Root>
-        <Logger name="ru.geekbrains.java3.lessons.lesson6_log_test.LoggingExample" level="info" additivity="false">
+        <Logger name="de.telran.logging" level="TRACE" additivity="false">
             <AppenderRef ref="FILE2" />
             <AppenderRef ref="STDOUT" />
         </Logger>
-<!--        <Logger name="ru.geekbrains.logging.StableModule" level="error" />-->
+        <Logger name="de.telran.io" level="WARN" additivity="false">
+            <AppenderRef ref="FILE1" />
+        </Logger>
     </Loggers>
 </Configuration>
