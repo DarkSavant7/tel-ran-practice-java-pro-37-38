@@ -2,7 +2,7 @@ package de.telran.reflection.little_hiber;
 
 public class HiberTest {
     public static void main(String[] args) {
-        LittleHiber.createTable(Cat.class);
+//        LittleHiber.createTable(Cat.class);
         Cat[] cats = {
                 new Cat(1, "Barsik", "white"),
         new Cat(2, "Barsik2", "white"),
@@ -13,7 +13,7 @@ public class HiberTest {
             LittleHiber.insertObjectToDatabase(cat);
         }
 
-        LittleHiber.createTable(Employee.class);
+//        LittleHiber.createTable(Employee.class);
         Employee emp = new Employee(
                 20,
                 "Vasya",

@@ -99,6 +99,7 @@ public class LittleHiber {
                     sb.append(", ");
                 }
             }
+            // create table if not exists cats (id integer, name text, color text,
             sb.setLength(sb.length() - 2);
             sb.append(");");
             smt.execute(sb.toString());

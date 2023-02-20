@@ -1,17 +1,19 @@
 package de.telran.reflection;
 
 import java.io.Serializable;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 public class ReflectionExample {
 
     public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException, IllegalAccessException, NoSuchMethodException, InvocationTargetException, InstantiationException {
 //        Class<Cat> catClass = Cat.class;
-//        Class catClass1 = Class.forName("ru.geekbrains.java3.lessons.lesson3_io.Cat");
+//        Class catClass1 = Class.forName("de.telran.reflection.little_hiber.Cat");
         Cat cat = new Cat("Barsik", "white", 2);
-        Class catClass =  cat.getClass();
+        Class catClass = cat.getClass();
 
 //        int modifiers = catClass.getModifiers();
 //        System.out.println(modifiers);
@@ -27,10 +29,12 @@ public class ReflectionExample {
 //            System.out.println(field);
 //        }
 //        Field field = catClass.getDeclaredField("name");
+////        Field field = catClass.getField("name");
 //        Field field1 = catClass.getDeclaredField("age");
-//        System.out.println(field.get(null)); //Для статического
+//        Field field3 = catClass.getDeclaredField("type");
+//        System.out.println(field3.get(null)); //Для статического
 //        System.out.println(field.get(cat));
-//        System.out.println(field.getShort(cat));
+//        System.out.println(field1.getInt(cat));
 //        field.setAccessible(true);
 //        field1.setAccessible(true);
 //        field.set(cat, "Murzik");
@@ -48,43 +52,51 @@ public class ReflectionExample {
 //        System.out.println(reflector);
 //        System.out.println(refl2);
 
-        Method method = catClass.getDeclaredMethod("run", int.class);
-        method.setAccessible(true);
-        method.invoke(cat, 100500);
+//        Method[] methods = catClass.getDeclaredMethods();
+//        for (Method method : methods) {
+//            System.out.println(method);
+//        }
+//        Method method = catClass.getDeclaredMethod("run", int.class);
+//        method.setAccessible(true);
+//        method.invoke(cat, 100500); //null for static
 
-        Field[] fields2 = catClass.getDeclaredFields();
-        for (Field fieldX : fields2) {
-            fieldX.setAccessible(true);
-            if (fieldX.isAnnotationPresent(MyAnnotation.class)) {
-                System.out.println(fieldX.get(cat));
-                System.out.println(((MyAnnotation)fieldX.getAnnotation(MyAnnotation.class)).value());
-            }
-        }
+//        Field[] fields2 = catClass.getDeclaredFields();
+//        for (Field fieldX : fields2) {
+//            fieldX.setAccessible(true);
+//            if (fieldX.isAnnotationPresent(MyAnnotation.class)) {
+//                System.out.println(fieldX.getName());
+//                System.out.println(fieldX.get(cat));
+//                System.out.println(((MyAnnotation)fieldX.getAnnotation(MyAnnotation.class)).value());
+//                System.out.println(((MyAnnotation)fieldX.getAnnotation(MyAnnotation.class)).some());
+//            }
+//        }
     }
 
-   public static class Cat implements Cloneable, Serializable {
+    @MyAnnotation
+    public static class Cat implements Cloneable, Serializable {
         static String type = "CAT";
         public final String name;
         public String color;
 
-        @MyAnnotation(value = "Hello", some = 99)
-       final int age = 1;
+        @MyAnnotation(value = "Value")
+        final int age;
         private Bowl b;
 
-       public Cat() {
-//           age = 1;
-           name = "Nameless";
-       }
+        public Cat() {
+            age = 1;
+            name = "Nameless";
+        }
 
-       public Cat(String name, String color, int age) {
+        public Cat(String name, String color, int age) {
             this.name = name;
             this.color = color;
-//            this.age = age;
+            this.age = age;
         }
 
         void voice() {
             System.out.println(name + " mew");
         }
+
         private void run(int distance) {
             System.out.println(name + " running for " + distance);
         }
@@ -98,7 +110,8 @@ public class ReflectionExample {
                     '}';
         }
     }
-   public static class Bowl {
+
+    public static class Bowl {
         int food;
     }
 }
