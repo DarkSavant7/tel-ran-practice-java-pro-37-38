@@ -24,10 +24,9 @@
             <AppenderRef ref="FILE1"/>
             <AppenderRef ref="STDOUT" />
         </Root>
-        <Logger name="ru.geekbrains.java3.lessons.lesson6_log_test.LoggingExample" level="info" additivity="false">
+        <Logger name="de.telran.logging.LoggingExample" level="info" additivity="false">
             <AppenderRef ref="FILE2" />
             <AppenderRef ref="STDOUT" />
         </Logger>
-<!--        <Logger name="ru.geekbrains.logging.StableModule" level="error" />-->
     </Loggers>
 </Configuration>
