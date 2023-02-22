@@ -22,9 +22,10 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public MessageDto create(MessageDto message) {
-        log.info("Creating message");
+        log.info("Creating message: {}", message);
         var entity = mapper.toEntity(message);
         entity = messageRepository.save(entity);
+        log.info("Saved message: {}", entity);
         return mapper.fromEntity(entity);
     }
 

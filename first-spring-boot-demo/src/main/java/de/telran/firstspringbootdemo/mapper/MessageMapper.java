@@ -5,8 +5,9 @@ import de.telran.firstspringbootdemo.domain.entity.Message;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public abstract class MessageMapper {
+public interface MessageMapper {
 
-    public abstract MessageDto fromEntity(Message message);
-    public abstract Message toEntity(MessageDto message);
+    MessageDto fromEntity(Message message);
+
+    Message toEntity(MessageDto message);
 }
