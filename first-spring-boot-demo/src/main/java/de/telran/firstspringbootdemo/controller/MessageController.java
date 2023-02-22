@@ -28,7 +28,8 @@ import java.util.UUID;
 @Tag(name = "Messages API", description = "Set of endpoints to work with messages")
 public class MessageController {
     MessageService service;
-
+//96aa17d9-2002-4e90-9511-a1a8aa864145
+//66176f36-4d17-4041-bc25-1565f777080c
     @Operation(summary = "Create message")
     @PostMapping("/")
     public MessageDto create(@RequestBody MessageDto message) {
