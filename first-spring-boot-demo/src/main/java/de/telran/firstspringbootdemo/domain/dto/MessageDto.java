@@ -19,7 +19,7 @@ import java.util.UUID;
 public class MessageDto {
     @Schema(name = "id", description = "Message id")
     UUID id;
-    @Schema(name = "header", description = "Message header")
+    @Schema(name = "header", description = "Message header", example = "HEADERRRR")
     String header;
     @Schema(name = "text", description = "Message text")
     String text;
