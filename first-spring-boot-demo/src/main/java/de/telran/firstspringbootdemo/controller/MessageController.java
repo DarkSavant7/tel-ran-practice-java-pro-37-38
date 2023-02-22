@@ -47,13 +47,13 @@ public class MessageController {
         service.delete(id);
     }
 
-    @Operation(summary = "Delete message")
+    @Operation(summary = "Find message by ID")
     @GetMapping("/{id}")
     public MessageDto findById(@PathVariable UUID id) {
         return service.findById(id);
     }
 
-    @Operation(summary = "Delete message")
+    @Operation(summary = "Find message by heading")
     @GetMapping("/find")
     public MessageDto findByHeaderLike(@RequestParam("header") String header) {
         return service.findByHeaderLike(header);
