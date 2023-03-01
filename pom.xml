@@ -12,6 +12,7 @@
         <module>java-core</module>
         <module>first-spring-boot-demo</module>
         <module>hibernate-demo</module>
+        <module>another-hiber-example</module>
     </modules>
 
     <properties>

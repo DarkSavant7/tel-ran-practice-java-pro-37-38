@@ -27,6 +27,7 @@ public class UserDaoImpl implements UserDao {
             session.beginTransaction();
             User user = session
                     .createQuery("select user from User user where user.name = :name", User.class)
+//                    .createQuery("select u.id, u.score, u.name from schema_name.users u where u.name = :name", User.class)
                     .setParameter("name", name)
                     .getSingleResult();
             session.getTransaction().commit();
