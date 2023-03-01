@@ -11,6 +11,7 @@
     <modules>
         <module>java-core</module>
         <module>first-spring-boot-demo</module>
+        <module>hibernate-demo</module>
     </modules>
 
     <properties>
