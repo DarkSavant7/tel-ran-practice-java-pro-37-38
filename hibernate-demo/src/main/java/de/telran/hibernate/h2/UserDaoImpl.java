@@ -36,6 +36,19 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public UserDto findDtoById(Long id) {
+        try (Session session = sessionFactoryUtils.getSession()) {
+            session.beginTransaction();
+            UserDto user = session
+                    .createQuery("select new de.telran.hibernate.h2.UserDto(user.name, user.score) from User user where user.id = :id", UserDto.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+            session.getTransaction().commit();
+            return user;
+        }
+    }
+
+    @Override
     public List<User> findAll() {
         try (Session session = sessionFactoryUtils.getSession()) {
             session.beginTransaction();
@@ -85,5 +98,10 @@ public class UserDaoImpl implements UserDao {
             session.get(User.class, 1L);
             session.getTransaction().commit();
         }
+
+        var user = findDtoById(1L);
+
+            System.out.printf("User got: %s %s\n", user.getName(), user.getScore());
+
     }
 }
