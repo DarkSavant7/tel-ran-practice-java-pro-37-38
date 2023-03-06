@@ -11,11 +11,14 @@ import java.util.UUID;
 
 @Repository
 public interface MessageRepository  extends JpaRepository<Message, UUID> {
-    Message save(Message message);
-    void deleteById(UUID id);
-    Optional<Message> findById(UUID id);
+//    Message save(Message message);
+//    void deleteById(UUID id);
+//    Optional<Message> findById(UUID id);
     Optional<Message> findByHeaderLike(String header);
 
-//    @Query(value = "DELETE from messages m WHERE m.header = :header")
-//    void deleteByHeader(@Param("header") String header);
+    @Query(value = "DELETE from messages m WHERE m.header = :header")
+    void deleteByHeader(@Param("header") String header);
+
+    @Query(value = "DELETE from messages m WHERE m.header = :header", nativeQuery = true)
+    void superCustomQuery(@Param("header") String header);
 }

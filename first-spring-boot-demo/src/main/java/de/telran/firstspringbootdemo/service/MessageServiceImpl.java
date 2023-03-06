@@ -3,6 +3,7 @@ package de.telran.firstspringbootdemo.service;
 import de.telran.firstspringbootdemo.domain.dto.MessageDto;
 import de.telran.firstspringbootdemo.mapper.MessageMapper;
 import de.telran.firstspringbootdemo.repository.MessageRepository;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -21,6 +22,7 @@ public class MessageServiceImpl implements MessageService {
     MessageMapper mapper;
 
     @Override
+    @Transactional
     public MessageDto create(MessageDto message) {
         log.info("Creating message: {}", message);
         var entity = mapper.toEntity(message);
