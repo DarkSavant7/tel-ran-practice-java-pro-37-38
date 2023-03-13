@@ -1,4 +1,52 @@
 server:
   port: 8189
   servlet:
-    context-path: /tel
+    context-path: /market
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/market
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+  liquibase:
+    change-log: db/changelog/db.changelog-master.xml
+    enabled: true
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  jackson:
+    serialization:
+      indent_output: true
+  output:
+    ansi:
+      enabled: always
+  main:
+    banner-mode: console
+  application:
+    name: market-app
+springdoc:
+  webjars:
+    prefix:
+  swagger-ui:
+    path: "/"
+    disable-swagger-default-url: true
+    url: /v3/api-docs.yaml
+logging:
+  level:
+    org.hibernate: ERROR
+    org.flywaydb: DEBUG
+    org.flywaydb.core.internal.dbsupport.SqlScript: DEBUG
+  file:
+    name: history.log
