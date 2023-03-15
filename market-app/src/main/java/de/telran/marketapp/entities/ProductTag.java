@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Table(name = "product_tags")
@@ -35,11 +36,11 @@ public class ProductTag {
     UUID id;
     String name;
     String description;
-//    @ManyToMany
-//    @JoinTable(name = "products_product_tags",
-//            joinColumns = {@JoinColumn(name = "product_tag_id")},
-//            inverseJoinColumns= {@JoinColumn(name = "product_id")})
-//    List<Product> products;
+    @ManyToMany
+    @JoinTable(name = "products_product_tags",
+            joinColumns = {@JoinColumn(name = "product_tag_id")},
+            inverseJoinColumns= {@JoinColumn(name = "product_id")})
+    Set<Product> products;
     @CreationTimestamp
     OffsetDateTime created;
     @UpdateTimestamp

@@ -1,7 +1,7 @@
 package de.telran.marketapp.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -9,57 +9,60 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
 
-@Table(name = "products")
+@Table(name = "roles")
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @Entity
-@Builder
-public class Product {
+public class Role {
     @Id
-    @GeneratedValue
-    UUID id;
-    String name;
-    String description;
-    BigDecimal price;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "products_product_tags",
-            inverseJoinColumns = {@JoinColumn(name = "product_tag_id")},
-            joinColumns = {@JoinColumn(name = "product_id")})
-    Set<ProductTag> tags;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @NotNull
+    @Column(name = "name")
+    private String name;
+
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "role_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @ManyToMany
+    @ToString.Exclude
+    private List<User> users;
+
     @CreationTimestamp
-    OffsetDateTime created;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
     @UpdateTimestamp
-    OffsetDateTime updated;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product user)) return false;
-        return Objects.equals(id, user.id);
-    }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Role role = (Role) o;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+        return Objects.equals(id, role.id);
     }
 }

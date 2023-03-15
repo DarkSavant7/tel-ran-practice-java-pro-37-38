@@ -1,9 +1,9 @@
-package de.telran.marketapp.entities;
+package de.telran.marketapp.dto;
 
+import de.telran.marketapp.entities.ProductTag;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -23,43 +23,19 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
-@Table(name = "products")
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Entity
 @Builder
-public class Product {
-    @Id
-    @GeneratedValue
+public class ProductDto {
     UUID id;
     String name;
     String description;
     BigDecimal price;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "products_product_tags",
-            inverseJoinColumns = {@JoinColumn(name = "product_tag_id")},
-            joinColumns = {@JoinColumn(name = "product_id")})
-    Set<ProductTag> tags;
-    @CreationTimestamp
-    OffsetDateTime created;
-    @UpdateTimestamp
-    OffsetDateTime updated;
+    List<String> tags;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product user)) return false;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

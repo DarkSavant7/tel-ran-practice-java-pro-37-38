@@ -1,5 +1,7 @@
 package de.telran.marketapp.web;
 
+import de.telran.marketapp.dto.CreateProductDto;
+import de.telran.marketapp.dto.ProductDto;
 import de.telran.marketapp.entities.Product;
 import de.telran.marketapp.services.ProductService;
 import lombok.AccessLevel;
@@ -29,17 +31,17 @@ public class ProductController {
     ProductService service;
 
     @PostMapping
-    public Product create(@RequestBody Product product) {
+    public ProductDto create(@RequestBody CreateProductDto product) {
         return service.create(product);
     }
 
     @GetMapping("/{id}")
-    public Product findById(@PathVariable(value = "id", required = false) UUID id) {
+    public ProductDto findById(@PathVariable(value = "id", required = false) UUID id) {
         return service.findById(id);
     }
 
     @GetMapping
-    public List<Product> findAll() {
+    public List<ProductDto> findAll() {
         return service.findAll();
     }
 
