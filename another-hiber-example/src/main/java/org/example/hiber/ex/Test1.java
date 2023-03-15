@@ -15,7 +15,7 @@ public class Test1 {
         {
             Session session = factory.getCurrentSession();
             session.beginTransaction();
-            session.save(employee);
+           var emp = session.save(employee);
             session.getTransaction().commit();
 
             System.out.println("DONE!");
