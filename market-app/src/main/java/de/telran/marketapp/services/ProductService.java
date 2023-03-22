@@ -2,7 +2,6 @@ package de.telran.marketapp.services;
 
 import de.telran.marketapp.dto.CreateProductDto;
 import de.telran.marketapp.dto.ProductDto;
-import de.telran.marketapp.entities.Product;
 import de.telran.marketapp.mapper.ProductMapper;
 import de.telran.marketapp.repositiory.ProductRepository;
 import jakarta.transaction.Transactional;
@@ -10,9 +9,10 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -28,7 +28,6 @@ public class ProductService {
     public ProductDto create(CreateProductDto dto) {
         log.info("Creating product");
         var product = mapper.mapCreateDtoToProduct(dto);
-//        product.setId(UUID.randomUUID());
         var result = repository.save(product);
         return mapper.mapToDto(result);
     }
@@ -41,11 +40,10 @@ public class ProductService {
     }
 
     @Transactional
-    public List<ProductDto> findAll() {
+    public Page<ProductDto> findAll(int page, int size) {
         log.info("Finding all products");
-        return repository.findAll().stream()
-                .map(mapper::mapToDto)
-                .toList();
+        var pagination = PageRequest.of(page, size);
+        return repository.findAll(pagination).map(mapper::mapToDto);
     }
 
     @Transactional
