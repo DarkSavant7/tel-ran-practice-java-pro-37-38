@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql
+    container_name: market-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: market
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-market-data:/var/lib/mysql
+    cap_add:
+      - IPC_LOCK
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 1s
+      timeout: 1s
+      retries: 5
+  phpmyadmin:
+    image: phpmyadmin:5.2.0
+    container_name: PhpMyAdmin
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - "33306:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+volumes:
+  mysql-market-data:
