@@ -1,5 +1,7 @@
-package de.telran.marketapp.entities;
+package de.telran.marketapp.dto;
 
+import de.telran.marketapp.entities.Order;
+import de.telran.marketapp.entities.Product;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,40 +23,15 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
-@Table(name = "order_items")
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Entity
 @Builder
-public class OrderItem {
-    @Id
-    @GeneratedValue
+public class OrderItemDto {
     UUID id;
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    Product product;
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    Order order;
+    ProductDto product;
     BigDecimal quantity;
     BigDecimal entirePrice;
-    @CreationTimestamp
-    OffsetDateTime created;
-    @UpdateTimestamp
-    OffsetDateTime updated;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OrderItem user)) return false;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

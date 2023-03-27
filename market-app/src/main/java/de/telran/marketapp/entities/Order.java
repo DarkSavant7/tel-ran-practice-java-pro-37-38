@@ -9,6 +9,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,15 +30,16 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Builder
 public class Order {
     @Id
     @GeneratedValue
     UUID id;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    User user;
     @OneToMany
-    List<OrderItem> description;
+    List<OrderItem> items;
     BigDecimal price;
     @CreationTimestamp
     OffsetDateTime created;

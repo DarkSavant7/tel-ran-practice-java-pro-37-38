@@ -2,6 +2,7 @@ package de.telran.marketapp.services;
 
 import de.telran.marketapp.dto.CreateProductDto;
 import de.telran.marketapp.dto.ProductDto;
+import de.telran.marketapp.entities.Product;
 import de.telran.marketapp.mapper.ProductMapper;
 import de.telran.marketapp.repositiory.ProductRepository;
 import jakarta.transaction.Transactional;
@@ -13,6 +14,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -40,10 +43,21 @@ public class ProductService {
     }
 
     @Transactional
+    public Product getById(UUID id) {
+        log.info("Finding product {}", id);
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Product not found"));
+    }
+
+    @Transactional
     public Page<ProductDto> findAll(int page, int size) {
         log.info("Finding all products");
         var pagination = PageRequest.of(page, size);
         return repository.findAll(pagination).map(mapper::mapToDto);
+    }
+
+    @Transactional
+    public List<Product> findByIds(Collection<UUID> ids) {
+        return repository.findAllByIdIn(ids);
     }
 
     @Transactional
