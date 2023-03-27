@@ -1,0 +1,47 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="20230327041524-1" author="user">
+        <createTable tableName="orders">
+            <column name="id" type="binary(16)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="price" type="numeric" defaultValue="0.00">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="binary(16)">
+                <constraints referencedTableName="users"/>
+            </column>
+            <column name="created" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="order_items">
+            <column name="id" type="binary(16)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="quantity" type="numeric" defaultValue="1.00">
+                <constraints nullable="false"/>
+            </column>
+            <column name="entire_price" type="numeric" defaultValue="0.00">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="binary(16)">
+                <constraints referencedTableName="products"/>
+            </column>
+            <column name="order_id" type="binary(16)">
+                <constraints referencedTableName="orders"/>
+            </column>
+            <column name="created" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

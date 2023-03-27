@@ -1,13 +1,16 @@
 package de.telran.marketapp.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,9 +30,10 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Builder
 public class OrderItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -37,9 +41,10 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "order_id")
     Order order;
-    Integer quantity;
-    BigDecimal entirePrice;
+    BigDecimal quantity = BigDecimal.ZERO;
+    BigDecimal entirePrice = BigDecimal.ZERO;
     @CreationTimestamp
+    @Column(name = "created", updatable = false)
     OffsetDateTime created;
     @UpdateTimestamp
     OffsetDateTime updated;

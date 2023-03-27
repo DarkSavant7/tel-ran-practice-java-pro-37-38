@@ -1,36 +1,39 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--there are some functions for working with UUID in mysql 8+:-->
+    <!--    BIN_TO_UUID(uuid, true) - when we want to get binary16 as uuid-->
+    <!--    UUID_TO_BIN(uuid) - when we want to write UUID string as binary16-->
 
     <changeSet id="20230315041524-1" author="user">
         <insert tableName="roles">
-            <column name="name" value="ADMIN" />
-            <column name="id" value="1" />
-            <column name="created" value="2023-03-15_14:00:00" />
-            <column name="updated" value="2023-03-15_14:00:00" />
+            <column name="name" value="ADMIN"/>
+            <column name="id" value="1"/>
+            <column name="created" value="2023-03-15_14:00:00"/>
+            <column name="updated" value="2023-03-15_14:00:00"/>
         </insert>
         <insert tableName="roles">
-            <column name="name" value="CUSTOMER" />
-            <column name="id" value="2" />
-            <column name="created" value="2023-03-15_14:00:00" />
-            <column name="updated" value="2023-03-15_14:00:00" />
+            <column name="name" value="CUSTOMER"/>
+            <column name="id" value="2"/>
+            <column name="created" value="2023-03-15_14:00:00"/>
+            <column name="updated" value="2023-03-15_14:00:00"/>
         </insert>
         <insert tableName="roles">
-            <column name="name" value="MANAGER" />
-            <column name="id" value="3" />
-            <column name="created" value="2023-03-15_14:00:00" />
-            <column name="updated" value="2023-03-15_14:00:00" />
+            <column name="name" value="MANAGER"/>
+            <column name="id" value="3"/>
+            <column name="created" value="2023-03-15_14:00:00"/>
+            <column name="updated" value="2023-03-15_14:00:00"/>
         </insert>
         <insert tableName="users">
-            <column name="id" value="e49b4456-a62e-46b2-aa03-ecf13e9a1b01" />
-            <column name="login" value="admin" />
-            <column name="password" value="$2a$12$x3HS3ywXOSdCKK03oZ.UZOWeFFTJWp28jxmxbN.7veFik40Qs8lx6" />
-            <column name="created" value="2023-03-15_14:00:00" />
-            <column name="updated" value="2023-03-15_14:00:00" />
+            <column name="id" valueComputed="UUID_TO_BIN('e49b4456-a62e-46b2-aa03-ecf13e9a1b01')"/>
+            <column name="login" value="admin"/>
+            <column name="password" value="$2a$12$x3HS3ywXOSdCKK03oZ.UZOWeFFTJWp28jxmxbN.7veFik40Qs8lx6"/>
+            <column name="created" value="2023-03-15_14:00:00"/>
+            <column name="updated" value="2023-03-15_14:00:00"/>
         </insert>
         <insert tableName="users_roles">
-            <column name="id" defaultValueComputed="UUID()"/>
-            <column name="user_id" value="e49b4456-a62e-46b2-aa03-ecf13e9a1b01"/>
+            <column name="id" valueComputed="UUID_TO_BIN(UUID())"/>
+            <column name="user_id" valueComputed="UUID_TO_BIN('e49b4456-a62e-46b2-aa03-ecf13e9a1b01')"/>
             <column name="role_id" value="1"/>
         </insert>
     </changeSet>

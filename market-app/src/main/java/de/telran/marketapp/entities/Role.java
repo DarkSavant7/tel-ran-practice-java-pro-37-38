@@ -50,11 +50,11 @@ public class Role {
     private List<User> users;
 
     @CreationTimestamp
-    @Column(name = "created_at")
+    @Column(name = "created", updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at")
+    @Column(name = "updated")
     private LocalDateTime updatedAt;
 
     @Override

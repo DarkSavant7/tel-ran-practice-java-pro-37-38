@@ -9,7 +9,6 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -18,11 +17,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class ProductDto {
+public class OrderItemDto {
     UUID id;
-    String name;
-    String description;
-    BigDecimal price;
-    List<String> tags;
-
+    ProductDto product;
+    BigDecimal quantity;
+    BigDecimal entirePrice;
 }

@@ -1,5 +1,6 @@
 package de.telran.marketapp.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +22,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -36,17 +36,18 @@ import java.util.UUID;
 @Builder
 public class Product {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
     String name;
     String description;
-    BigDecimal price;
+    BigDecimal price = BigDecimal.ZERO;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "products_product_tags",
             inverseJoinColumns = {@JoinColumn(name = "product_tag_id")},
             joinColumns = {@JoinColumn(name = "product_id")})
     Set<ProductTag> tags;
     @CreationTimestamp
+    @Column(name = "created", updatable = false)
     OffsetDateTime created;
     @UpdateTimestamp
     OffsetDateTime updated;

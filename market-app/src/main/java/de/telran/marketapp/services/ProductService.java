@@ -10,8 +10,11 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,7 +31,6 @@ public class ProductService {
     public ProductDto create(CreateProductDto dto) {
         log.info("Creating product");
         var product = mapper.mapCreateDtoToProduct(dto);
-//        product.setId(UUID.randomUUID());
         var result = repository.save(product);
         return mapper.mapToDto(result);
     }
@@ -41,11 +43,21 @@ public class ProductService {
     }
 
     @Transactional
-    public List<ProductDto> findAll() {
+    public Product getById(UUID id) {
+        log.info("Finding product {}", id);
+        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Product not found"));
+    }
+
+    @Transactional
+    public Page<ProductDto> findAll(int page, int size) {
         log.info("Finding all products");
-        return repository.findAll().stream()
-                .map(mapper::mapToDto)
-                .toList();
+        var pagination = PageRequest.of(page, size);
+        return repository.findAll(pagination).map(mapper::mapToDto);
+    }
+
+    @Transactional
+    public List<Product> findByIds(Collection<UUID> ids) {
+        return repository.findAllByIdIn(ids);
     }
 
     @Transactional
