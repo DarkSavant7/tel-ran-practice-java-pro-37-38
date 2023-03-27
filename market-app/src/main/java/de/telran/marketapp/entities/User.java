@@ -1,7 +1,9 @@
 package de.telran.marketapp.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -33,7 +35,7 @@ import java.util.UUID;
 @Entity
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
     String login;
     String password;
@@ -46,6 +48,7 @@ public class User {
     @LazyCollection(LazyCollectionOption.TRUE)
     private List<Role> roles;
     @CreationTimestamp
+    @Column(name = "created", updatable = false)
     OffsetDateTime created;
     @UpdateTimestamp
     OffsetDateTime updated;

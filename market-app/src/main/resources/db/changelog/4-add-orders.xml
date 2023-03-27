@@ -4,7 +4,7 @@
 
     <changeSet id="20230327041524-1" author="user">
         <createTable tableName="orders">
-            <column name="id" type="binary(16)" >
+            <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="price" type="numeric" defaultValue="0.00">
@@ -21,7 +21,7 @@
             </column>
         </createTable>
         <createTable tableName="order_items">
-            <column name="id" type="binary(16)" >
+            <column name="id" type="binary(16)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="quantity" type="numeric" defaultValue="1.00">

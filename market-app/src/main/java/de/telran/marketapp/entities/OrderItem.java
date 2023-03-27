@@ -1,7 +1,9 @@
 package de.telran.marketapp.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -31,7 +33,7 @@ import java.util.UUID;
 @Builder
 public class OrderItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -39,9 +41,10 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "order_id")
     Order order;
-    BigDecimal quantity;
-    BigDecimal entirePrice;
+    BigDecimal quantity = BigDecimal.ZERO;
+    BigDecimal entirePrice = BigDecimal.ZERO;
     @CreationTimestamp
+    @Column(name = "created", updatable = false)
     OffsetDateTime created;
     @UpdateTimestamp
     OffsetDateTime updated;

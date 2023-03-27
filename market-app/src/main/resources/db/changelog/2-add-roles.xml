@@ -5,7 +5,7 @@
     <changeSet id="20230314041524-1" author="user">
         <createTable tableName="roles">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false" />
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>

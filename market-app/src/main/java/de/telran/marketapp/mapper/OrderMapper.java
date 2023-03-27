@@ -1,23 +1,15 @@
 package de.telran.marketapp.mapper;
 
-import de.telran.marketapp.dto.CreateProductDto;
 import de.telran.marketapp.dto.OrderDto;
 import de.telran.marketapp.dto.OrderItemDto;
-import de.telran.marketapp.dto.ProductDto;
 import de.telran.marketapp.entities.Order;
 import de.telran.marketapp.entities.OrderItem;
-import de.telran.marketapp.entities.Product;
-import de.telran.marketapp.entities.ProductTag;
 import de.telran.marketapp.services.ProductService;
-import de.telran.marketapp.services.ProductTagService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.UUID;
 
 @Component
 @Slf4j
@@ -26,6 +18,7 @@ import java.util.UUID;
 public class OrderMapper {
     ProductMapper productMapper;
     ProductService productService;
+
     public OrderItemDto itemFromEntity(OrderItem item) {
         return OrderItemDto.builder()
                 .id(item.getId())

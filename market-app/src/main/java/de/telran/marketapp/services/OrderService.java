@@ -35,14 +35,12 @@ public class OrderService {
         log.info("Got a new order");
         log.debug("Order: {}", dto);
         var createOrder = new Order();
-        createOrder.setId(UUID.randomUUID());
         var order = orderRepository.save(createOrder);
         var productIds = dto.getItems().stream().map(i -> i.getProduct()).toList();
         var products = productService.findByIds(productIds).stream()
                 .collect(Collectors.toMap(Product::getId, Function.identity()));
         var items = dto.getItems().stream()
                 .map(i -> OrderItem.builder()
-                        .id(UUID.randomUUID())
                         .product(products.get(i.getProduct()))
                         .order(order)
                         .quantity(i.getQuantity())
@@ -50,8 +48,9 @@ public class OrderService {
                         .build()
                 )
                 .toList();
+        items = orderItemRepository.saveAll(items);
         order.setItems(items);
-        orderItemRepository.saveAll(items);
+        log.info("Order: {}", order);
         var result = orderRepository.save(order);
         return mapper.fromEntity(result);
     }
