@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,11 +19,17 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class ProductDto {
+public class AnotherOrderDto {
     UUID id;
-    String name;
-    String description;
+    List<OrderItemFlatDto> items;
     BigDecimal price;
-    List<ProductTagDto> tags;
+    OffsetDateTime created;
+    OffsetDateTime updated;
 
+    public AnotherOrderDto(UUID id, BigDecimal price, OffsetDateTime created, OffsetDateTime updated) {
+        this.id = id;
+        this.price = price;
+        this.created = created;
+        this.updated = updated;
+    }
 }

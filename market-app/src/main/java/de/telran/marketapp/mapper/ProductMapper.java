@@ -36,7 +36,7 @@ public class ProductMapper {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
-                .tags(product.getTags().stream().map(ProductTag::getName).toList())
+//                .tags(product.getTags().stream().map(ProductTag::getName).toList())
                 .build();
     }
 }

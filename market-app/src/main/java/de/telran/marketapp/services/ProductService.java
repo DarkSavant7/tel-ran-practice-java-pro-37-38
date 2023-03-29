@@ -4,6 +4,7 @@ import de.telran.marketapp.dto.CreateProductDto;
 import de.telran.marketapp.dto.ProductDto;
 import de.telran.marketapp.entities.Product;
 import de.telran.marketapp.mapper.ProductMapper;
+import de.telran.marketapp.mapper.ProductMapstructMapper;
 import de.telran.marketapp.repositiory.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
@@ -25,21 +26,25 @@ import java.util.UUID;
 public class ProductService {
 
     ProductRepository repository;
-    ProductMapper mapper;
+    ProductMapper productMapper;
+    ProductMapstructMapper productMapstructMapper;
 
     @Transactional
     public ProductDto create(CreateProductDto dto) {
         log.info("Creating product");
-        var product = mapper.mapCreateDtoToProduct(dto);
+        var product = productMapper.mapCreateDtoToProduct(dto);
         var result = repository.save(product);
-        return mapper.mapToDto(result);
+        return productMapstructMapper.mapToDto(result);
     }
 
     @Transactional
     public ProductDto findById(UUID id) {
         log.info("Finding product {}", id);
         var result = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Product not found"));
-        return mapper.mapToDto(result);
+        return productMapstructMapper.mapToDto(result);
+//        var response = productMapstructMapper.mapToDto(result);
+//        response.setPrice();
+//        return response;
     }
 
     @Transactional
@@ -52,7 +57,7 @@ public class ProductService {
     public Page<ProductDto> findAll(int page, int size) {
         log.info("Finding all products");
         var pagination = PageRequest.of(page, size);
-        return repository.findAll(pagination).map(mapper::mapToDto);
+        return repository.findAll(pagination).map(productMapstructMapper::mapToDto);
     }
 
     @Transactional

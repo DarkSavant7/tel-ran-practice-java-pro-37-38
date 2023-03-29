@@ -20,12 +20,18 @@ public class OrderMapper {
     ProductService productService;
 
     public OrderItemDto itemFromEntity(OrderItem item) {
-        return OrderItemDto.builder()
-                .id(item.getId())
-                .entirePrice(item.getEntirePrice())
-                .quantity(item.getQuantity())
-                .product(productMapper.mapToDto(item.getProduct())) //@TODO think about optimization, maybe projection
-                .build();
+        return new OrderItemDto(
+                item.getId(),
+                productMapper.mapToDto(item.getProduct()),
+                item.getQuantity(),
+                item.getEntirePrice()
+        );
+//        return OrderItemDto.builder()
+//                .id(item.getId())
+//                .entirePrice(item.getEntirePrice())
+//                .quantity(item.getQuantity())
+//                .product(productMapper.mapToDto(item.getProduct())) //@TODO think about optimization, maybe projection
+//                .build();
     }
 
     public OrderItem itemToEntity(OrderItemDto dto) {
