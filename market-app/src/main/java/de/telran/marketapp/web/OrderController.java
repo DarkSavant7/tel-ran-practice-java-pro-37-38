@@ -6,6 +6,7 @@ import de.telran.marketapp.dto.OrderDto;
 import de.telran.marketapp.dto.OrderItemFlatDto;
 import de.telran.marketapp.dto.ProductDto;
 import de.telran.marketapp.services.OrderService;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
