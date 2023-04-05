@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.util.Collection;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ProductService {
     @Transactional
     public ProductDto findById(UUID id) {
         log.info("Finding product {}", id);
-        var result = repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Product not found"));
+        var result = repository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
         return productMapstructMapper.mapToDto(result);
 //        var response = productMapstructMapper.mapToDto(result);
 //        response.setPrice();
@@ -50,7 +51,7 @@ public class ProductService {
     @Transactional
     public Product getById(UUID id) {
         log.info("Finding product {}", id);
-        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Product not found"));
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
     @Transactional

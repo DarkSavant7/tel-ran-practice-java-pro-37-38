@@ -38,7 +38,7 @@ public class AuthRequestFilter extends OncePerRequestFilter {
                 username = jwtTokenUtil.getUsernameFromToken(jwt);
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username,
                         null,
-                        jwtTokenUtil.getRolesFromToken(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+                        jwtTokenUtil.getRolesFromToken(jwt).stream().map(SimpleGrantedAuthority::new).toList());
                 SecurityContextHolder.getContext().setAuthentication(token);
             } catch (ExpiredJwtException | MalformedJwtException e) {
                 StringBuilder sb = new StringBuilder();

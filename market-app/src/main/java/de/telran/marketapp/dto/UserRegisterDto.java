@@ -7,15 +7,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.util.UUID;
-
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
-public class ProductTagDto {
-    UUID id;
-    String tag;
-    String description;
+public class UserRegisterDto {
+    String login;
+    String password;
 }

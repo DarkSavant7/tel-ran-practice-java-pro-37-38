@@ -3,7 +3,6 @@ package de.telran.marketapp.mapper;
 import de.telran.marketapp.dto.CreateProductDto;
 import de.telran.marketapp.dto.ProductDto;
 import de.telran.marketapp.entities.Product;
-import de.telran.marketapp.entities.ProductTag;
 import de.telran.marketapp.services.ProductTagService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;

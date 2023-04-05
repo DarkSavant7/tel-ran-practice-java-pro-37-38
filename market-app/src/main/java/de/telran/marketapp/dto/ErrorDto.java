@@ -1,21 +1,17 @@
 package de.telran.marketapp.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
-import java.util.UUID;
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Getter
-@Setter
-public class ProductTagDto {
-    UUID id;
-    String tag;
-    String description;
+public class ErrorDto {
+     Integer code;
+     String message;
 }

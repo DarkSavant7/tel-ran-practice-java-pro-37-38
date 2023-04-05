@@ -1,5 +1,6 @@
 package de.telran.marketapp.beans;
 
+import de.telran.marketapp.entities.Role;
 import de.telran.marketapp.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -14,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Component
 public class JwtTokenUtil {
@@ -25,16 +25,16 @@ public class JwtTokenUtil {
     @Value("${jwt.expiration.minutes:120}")
     private long minutesToExpire;
 
-    public String generateTokenFromUser(User user) {
+    public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        List<String> roles = user.getRoles()
-                .stream()
-                .map(r -> new SimpleGrantedAuthority(r.getName()))
+        var roles = user.getRoles().stream()
+                .map(Role::getName)
+                .map(SimpleGrantedAuthority::new)
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+                .toList();
         claims.put("roles", roles);
 //        claims.put("full_name", getFullNameFromUser(user));
-        claims.put("user_id", user.getId());
+//        claims.put("user_id", user.getId());
 //        claims.put("login", user.getLogin());
 
         Date issuedDate = new Date();
@@ -45,7 +45,7 @@ public class JwtTokenUtil {
                 .setSubject(user.getLogin())
                 .setIssuedAt(issuedDate)
                 .setExpiration(expired)
-                .signWith(SignatureAlgorithm.RS512, secret)
+                .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
 

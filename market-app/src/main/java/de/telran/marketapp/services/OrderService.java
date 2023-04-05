@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class OrderService {
     @Transactional
     public OrderDto getOrderById(UUID id) {
         log.info("Looking for order {}", id);
-        var result = orderRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Order not found"));
+        var result = orderRepository.findById(id).orElseThrow(() -> new NotFoundException("Order not found"));
         return mapper.fromEntity(result);
     }
 
