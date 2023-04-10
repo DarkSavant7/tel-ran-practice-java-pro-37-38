@@ -17,7 +17,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-public class OrderItemFlatDto {
+public class OrderItemFlatDto implements OrderItemFlatProjection {
     UUID id;
     BigDecimal quantity;
     BigDecimal entirePrice;
