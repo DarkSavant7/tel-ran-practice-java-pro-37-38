@@ -18,7 +18,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, UUID> {
     @Query("""
             select new de.telran.marketapp.dto.OrderItemFlatDto(i.id, i.quantity, i.entirePrice, p.id, p.name, p.description, p.price, i.order.id)
             from OrderItem i
-            left join Product p on p.id = i.product.id                    
+            left join Product p on p.id = i.product.id                 
             """
     )
     List<OrderItemFlatDto> findAllDto();
