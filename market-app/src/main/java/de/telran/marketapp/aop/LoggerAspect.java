@@ -1,4 +1,4 @@
-package de.telran.marketapp;
+package de.telran.marketapp.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -32,9 +32,11 @@ public class LoggerAspect {
         log.info("Auth controller called: {}", joinPoint.getSignature());
     }
 
-//    @Around("execution(public * de.telran.marketapp.services.ProductService.*(..))")
-//    public Object beforeUserEditProduct(ProceedingJoinPoint joinPoint) throws Throwable {
-//        log.info("Auth controller called: {}", joinPoint.getSignature());
-//        return joinPoint.proceed();
-//    }
+    @Around("execution(public * de.telran.marketapp.services.ProductService.methodForAspect(String))")
+    public Object beforeUserEditProduct(ProceedingJoinPoint joinPoint) throws Throwable {
+        log.info("Aspect fake method called: {}", joinPoint.getSignature());
+        var result = joinPoint.proceed();
+        log.info("Result was {}", result);
+        return "Hello from aspect";
+    }
 }

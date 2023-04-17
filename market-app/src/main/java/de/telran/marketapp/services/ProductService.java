@@ -71,4 +71,9 @@ public class ProductService {
         log.info("Deleting product {}", id);
         repository.deleteById(id);
     }
+
+    public String methodForAspect(String arg) {
+        log.info("Method for aspect called with arg: {}", arg);
+        return "ASPECT";
+    }
 }
