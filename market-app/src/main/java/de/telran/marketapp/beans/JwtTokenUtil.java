@@ -33,6 +33,9 @@ public class JwtTokenUtil {
                 .map(GrantedAuthority::getAuthority)
                 .toList();
         claims.put("roles", roles);
+        claims.put("user-id", user.getId());
+        claims.put("test-claim", "claim");
+        claims.put("test-list", List.of("one", "two", "three"));
 //        claims.put("full_name", getFullNameFromUser(user));
 //        claims.put("user_id", user.getId());
 //        claims.put("login", user.getLogin());

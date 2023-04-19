@@ -1,15 +1,16 @@
-package de.telran.marketapp.dto;
+package de.telran.marketapp.dto.client;
 
+import de.telran.marketapp.dto.OrderItemFlatDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,12 +20,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@EqualsAndHashCode
-public class ProductDto {
+public class FakeClientDto {
     UUID id;
-    String name;
-    String description;
     BigDecimal price;
-    List<ProductTagDto> tags;
-
+//    OffsetDateTime created;
+//    OffsetDateTime updated;
 }

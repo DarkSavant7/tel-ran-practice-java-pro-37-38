@@ -57,3 +57,7 @@ jwt:
   secret: 'aodafjskbnoadjfnbo[jaern  wep[q[oekf-r-q349utwetijsfdvdskgkgn berwgkn gbe wrnojerng oergnoejtrnirgbnjdgiwnbiujrgbbipgtribn'
   expiration:
     minutes: 200
+
+rest:
+  client:
+    fake-url: https://google.com
