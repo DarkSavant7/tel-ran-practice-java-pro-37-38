@@ -53,7 +53,8 @@ public class ProductController {
         service.deleteById(id);
     }
 
-    @GetMapping("/aspect")
+    //    @RequestMapping(value = {"/aspect", "/suspect"}, method = {RequestMethod.GET})
+    @GetMapping({"/aspect", "/prospect", "/suspect"})
     public String findById(@RequestParam(value = "arg") String arg) {
         return service.methodForAspect(arg);
     }

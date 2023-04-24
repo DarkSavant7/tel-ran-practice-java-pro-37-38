@@ -17,6 +17,8 @@ https://www.youtube.com/watch?v=BmBr5diz8WA
 
 https://wiremock.org/
 
+https://swagger.io/docs/
+
 
 Books:
 https://www.manning.com/books/spring-in-action-sixth-edition
@@ -60,3 +62,6 @@ https://www.manning.com/books/kotlin-in-action-second-edition -- kotlin
 https://www.manning.com/books/spring-security-in-action -- security
 
 https://www.manning.com/books/gradle-in-action -- gradle
+
+
+Telegram @DarkSavant
