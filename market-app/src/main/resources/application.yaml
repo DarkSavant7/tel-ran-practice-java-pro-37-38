@@ -60,4 +60,4 @@ jwt:
 
 rest:
   client:
-    fake-url: https://google.com
+    fake-url: https://google.com/fake/client

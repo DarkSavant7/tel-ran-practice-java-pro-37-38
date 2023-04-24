@@ -16,7 +16,7 @@ import java.util.UUID;
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Slf4j
 @RequiredArgsConstructor
-public class DemoClient {
+public class FakeExternalServiceClient {
 
     @Value("${rest.client.fake-url}")
     @NonFinal

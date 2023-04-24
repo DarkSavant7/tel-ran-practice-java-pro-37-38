@@ -1,5 +1,6 @@
 package de.telran.marketapp.web;
 
+import de.telran.marketapp.client.FakeExternalServiceClient;
 import de.telran.marketapp.mapper.ProductMapper;
 import de.telran.marketapp.mapper.ProductMapstructMapper;
 import de.telran.marketapp.repositiory.ProductRepository;
@@ -18,6 +19,7 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.web.client.RestTemplate;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -45,6 +47,10 @@ class ProductControllerIntegrationTest {
     ProductMapstructMapper productMapstructMapper;
     @Autowired
     MockMvc mockMvc;
+    @Autowired
+    FakeExternalServiceClient fakeExternalServiceClient;
+    @Autowired
+    RestTemplate restTemplate;
 
     String url = "/products";
 
