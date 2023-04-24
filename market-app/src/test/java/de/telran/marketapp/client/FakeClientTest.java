@@ -37,10 +37,6 @@ public class FakeClientTest {
     @Autowired
     RestTemplate restTemplate;
 
-//    @BeforeEach
-//    public void init() {
-//        this.fakeClientService = new FakeClientService(fakeExternalServiceClient);
-//    }
     @Test
     public void testFakeClientService() {
         WireMock.any(urlMatching("/fake/client/*"))
