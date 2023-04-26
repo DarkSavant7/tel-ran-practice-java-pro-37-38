@@ -30,5 +30,33 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+  grafana:
+#    build: './config/grafana'
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+#    volumes:
+#      - /etc/grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+#    networks:
+#      monitoring:
+#        aliases:
+#          - grafana
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - 9090:9090
+    volumes:
+      - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+#      - /etc/prometheus:/prometheus
+#    networks:
+#      monitoring:
+#        aliases:
+#          - prometheus
 volumes:
   mysql-market-data:
+
+#networks:
+#  monitoring:

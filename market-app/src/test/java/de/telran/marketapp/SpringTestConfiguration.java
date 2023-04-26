@@ -8,8 +8,8 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 @EnableAutoConfiguration
 public class SpringTestConfiguration {
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+//    @Bean
+//    public RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
 }

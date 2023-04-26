@@ -1,6 +1,7 @@
 package de.telran.marketapp.web;
 
 import de.telran.marketapp.client.FakeExternalServiceClient;
+import de.telran.marketapp.entities.Product;
 import de.telran.marketapp.mapper.ProductMapper;
 import de.telran.marketapp.mapper.ProductMapstructMapper;
 import de.telran.marketapp.repositiory.ProductRepository;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
@@ -24,7 +26,15 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.UUID;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,6 +49,8 @@ class ProductControllerIntegrationTest {
     ProductController productController;
     @Autowired
     ProductService service;
+
+//    @MockBean
     @Autowired
     ProductRepository repository;
     @Autowired
@@ -51,6 +63,8 @@ class ProductControllerIntegrationTest {
     FakeExternalServiceClient fakeExternalServiceClient;
     @Autowired
     RestTemplate restTemplate;
+//    @MockBean
+//    @SpyBean
 
     String url = "/products";
 
@@ -71,6 +85,16 @@ class ProductControllerIntegrationTest {
     @WithMockUser(username = "TEST_VASYA", roles = {"TESTER"})
 //    @WithMockUser(username = "TEST_VASYA", roles = {"TESTER"}, authorities = {"AUTHORITY_READ"})
     void create() throws Exception {
+//        var prod = Product.builder()
+//                .name("test-prod")
+//                .description("test-description")
+//                .price(BigDecimal.TEN)
+//                .tags(Collections.emptySet())
+//                .id(UUID.randomUUID())
+//                .build();
+//        doReturn(prod).when(repository).save(any());
+//        when(repository.save(any())).thenReturn(prod);
+//      var result =  productController.create();
         var builder = MockMvcRequestBuilders.post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(FakeHolder.CREATE_PRODUCT_REQUEST);
@@ -78,7 +102,10 @@ class ProductControllerIntegrationTest {
         mockMvc.perform(builder)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is("test-prod")))
+//                .andExpect(jsonPath("$.collection[0].user.id", is("test-prod")))
+//                .andExpect(jsonPath("$.collection", hasItem("test-prod")))
                 .andExpect(jsonPath("$.description", is("test-description")));
+//        verify(repository, times(1)).save(any());
     }
 
     @Test

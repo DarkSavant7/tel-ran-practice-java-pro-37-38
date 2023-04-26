@@ -62,3 +62,16 @@ jwt:
 rest:
   client:
     fake-url: https://google.com/fake/client
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        "[http.server.requests]": true
+  prometheus:
+    metrics:
+      export:
+        enabled: true

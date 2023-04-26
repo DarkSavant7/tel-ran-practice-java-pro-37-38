@@ -37,7 +37,7 @@ public class OrderItemController {
         return service.findAll(price);
     }
 
-    @GetMapping()
+    @GetMapping()// url/path?price=10.12&another=mkdfdvmnokvfd
     public Collection<OrderItemFlatDto> findCustomOrderItems(@RequestParam("price") BigDecimal price) {
         return service.getCustomOrderItems(price);
     }
