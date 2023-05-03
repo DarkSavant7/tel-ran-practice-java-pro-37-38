@@ -11,6 +11,7 @@ services:
       MYSQL_PASSWORD: admin
     ports:
       - "3306:3306"
+#      - "3307:3307"
     volumes:
       - mysql-market-data:/var/lib/mysql
     cap_add:

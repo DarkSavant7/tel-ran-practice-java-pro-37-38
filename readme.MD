@@ -65,3 +65,9 @@ https://www.manning.com/books/gradle-in-action -- gradle
 
 
 Telegram @DarkSavant
+
+
+DOCKER
+
+Build: docker build . -t my-app-name
+
