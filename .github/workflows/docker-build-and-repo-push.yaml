@@ -55,7 +55,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: cd to the market module built
       - run cd market-app
 
 
