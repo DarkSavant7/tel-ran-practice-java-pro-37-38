@@ -2,7 +2,8 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <!--    <changeSet id="20230313041524-1" author="user" defaultValueComputed="UUID_TO_BIN(UUID())">-->
+    <!--    <changeSet id="20230313041524-1" author="user" defaultValueComputed="(UUID_TO_BIN(UUID()))">-->
+    <!--    https://www.liquibase.org/-->
     <changeSet id="20230313041524-1" author="user">
         <createTable tableName="users">
             <column name="id" type="binary(16)">

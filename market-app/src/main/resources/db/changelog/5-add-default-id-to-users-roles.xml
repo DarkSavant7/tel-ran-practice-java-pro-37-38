@@ -1,0 +1,10 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--                         You can do this if you use mySQL 8.0.13+-->
+    <changeSet id="20230410041524-1" author="user">
+        <addDefaultValue columnName="id"
+                         defaultValueComputed="(UUID_TO_BIN(UUID()))"
+                         tableName="users_roles"/>
+    </changeSet>
+</databaseChangeLog>

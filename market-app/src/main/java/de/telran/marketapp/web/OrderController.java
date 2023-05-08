@@ -1,5 +1,6 @@
 package de.telran.marketapp.web;
 
+import de.telran.marketapp.dto.AnotherOrderDto;
 import de.telran.marketapp.dto.CreateOrderDto;
 import de.telran.marketapp.dto.OrderDto;
 import de.telran.marketapp.services.OrderService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @RestController
@@ -33,5 +35,10 @@ public class OrderController {
     @GetMapping("/{id}")
     public OrderDto findById(@PathVariable(value = "id", required = false) UUID id) {
         return service.getOrderById(id);
+    }
+
+    @GetMapping
+    public Collection<AnotherOrderDto> findAll() {
+        return service.findAll();
     }
 }
