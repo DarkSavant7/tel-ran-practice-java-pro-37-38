@@ -33,7 +33,7 @@ jobs:
       - run: ./mvnw clean install
 
       - name: Store artifact
-        run: mkdir staging && cp target/dist/*.jar staging
+        run: mkdir staging && cp target/market-app.jar staging
 
       - uses: actions/upload-artifact@v2
         with:
