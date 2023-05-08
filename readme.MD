@@ -1,10 +1,10 @@
-Useful links:
-Docker:
+## Useful links:
+### Docker:
 https://docs.docker.com/get-docker/
 
 https://learn.microsoft.com/en-us/windows/wsl/install
 
-Spring:
+### Spring:
 https://spring.io/quickstart
 
 https://spring.io/guides
@@ -20,7 +20,8 @@ https://wiremock.org/
 https://swagger.io/docs/
 
 
-Books:
+### Books:
+
 https://www.manning.com/books/spring-in-action-sixth-edition
 
 https://www.manning.com/books/the-well-grounded-java-developer-second-edition -- overall java
@@ -64,10 +65,39 @@ https://www.manning.com/books/spring-security-in-action -- security
 https://www.manning.com/books/gradle-in-action -- gradle
 
 
-Telegram @DarkSavant
+## Telegram @DarkSavant
 
+### Create maven wrapper: in the particular directory (e.g. the project root):
+```bash
+mvn wrapper:wrapper
+```
+then you can use your mvnw for *nix or mvnw.cmd for win in order to use maven without installing it
+```bash
+./mvnw clean install
+```
+```powershell
+mvnw.cmd clean install
+```
 
-DOCKER
+## DOCKER
 
-Build: docker build . -t my-app-name
+### Build: 
+```bash
+docker build . -t my-app-name
+```
+### Save to file: 
+```bash
+docker save -o target/market-app.tar market-app
+```
 
+### Run: 
+```bash
+docker run \
+-p 8189:8189 \
+--name market-app-test \
+--add-host=host.docker.internal:host-gateway \
+-e JAVA_TOOL_OPTIONS=" \
+    -Dspring.datasource.url=jdbc:mysql://host.docker.internal:3306/market \
+    -Dlogging.level.de.telran.marketapp=DEBUG" \
+-d market-app:latest
+```

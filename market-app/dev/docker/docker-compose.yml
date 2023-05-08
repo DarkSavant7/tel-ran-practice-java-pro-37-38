@@ -41,10 +41,10 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
-#    networks:
-#      monitoring:
-#        aliases:
-#          - grafana
+    networks:
+      market-network:
+        aliases:
+          - grafana
   prometheus:
     image: prom/prometheus
     ports:
@@ -52,12 +52,12 @@ services:
     volumes:
       - /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 #      - /etc/prometheus:/prometheus
-#    networks:
-#      monitoring:
-#        aliases:
-#          - prometheus
+    networks:
+      market-network:
+        aliases:
+          - prometheus
 volumes:
   mysql-market-data:
 
-#networks:
-#  monitoring:
+networks:
+  market-network:
