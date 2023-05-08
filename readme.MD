@@ -93,7 +93,8 @@ docker save -o target/market-app.tar market-app
 ### Run: 
 ```bash
 docker run \
--p 8189:8189 \
+-p 8080:8189/tcp \
+-p 8080:8189/udp \
 --name market-app-test \
 --add-host=host.docker.internal:host-gateway \
 -e JAVA_TOOL_OPTIONS=" \
