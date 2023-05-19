@@ -3,6 +3,7 @@ package de.telran.marketapp.aop;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -22,6 +23,7 @@ public class LoggerAspect {
     } // определяем совет (Advice) "ПЕРЕД" выполнением кода бина (класса)
 
     @Before("getName()")
+//    @After("getName()")
     public void logBefore(JoinPoint joinPoint) {
 // выводим в консоль информацию о текущей точке соединения
         log.info("Service method called: {}", joinPoint.getSignature());
@@ -35,8 +37,9 @@ public class LoggerAspect {
     @Around("execution(public * de.telran.marketapp.services.ProductService.methodForAspect(String))")
     public Object beforeUserEditProduct(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("Aspect fake method called: {}", joinPoint.getSignature());
-        var result = joinPoint.proceed();
+        var result = (String) joinPoint.proceed();
         log.info("Result was {}", result);
         return "Hello from aspect";
+//        return result;
     }
 }

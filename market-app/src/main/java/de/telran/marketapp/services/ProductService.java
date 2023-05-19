@@ -51,7 +51,7 @@ public class ProductService {
     @Transactional
     public Product getById(UUID id) {
         log.info("Finding product {}", id);
-        return repository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
+        return repository.findById(id).orElseThrow(() -> new NotFoundException("Product not found. Id: " + id));
     }
 
     @Transactional

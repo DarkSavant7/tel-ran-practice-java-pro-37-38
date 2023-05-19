@@ -1,0 +1,65 @@
+server:
+  port: 8189
+  servlet:
+    context-path: /camel-demo
+
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+  jms:
+    template:
+      default-destination: camel.test-queue
+      task-queue: camel.task-queue
+      important-queue: camel.important-queue
+      otherwise-queue: camel.otherwise-queue
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=camel-gb
+    username: postgres
+    password: admin
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+        format_sql: true
+    resources:
+      static-locations: file:src/main/resources/static/
+    jackson:
+      serialization:
+        indent_output: true
+
+logging:
+  file:
+    name: log/camel-demo.log
+
+camel:
+  springboot:
+    name: ServicesRest
+  management:
+    port: 8081
+
+email:
+  address: imap.yandex.ru
+  autodelete: true
+  unseen: true
+  delay: 60000
+#  filename: import.json
+  attachments_path: attachments/
+
+camel-routes:
+  mail-route:
+    id: mail_consumer
+    autostart: true
+
+telegram:
+  key: 11111111111111111111
+  token: 1111111111111
+  daddy-token: 11111111111
+email_credentials:
+  username: 111111111111
+  password: 11111111111
+
+
+weather:
+  token: 16516565132123132321132321
