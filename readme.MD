@@ -19,6 +19,8 @@ https://wiremock.org/
 
 https://swagger.io/docs/
 
+https://camel.apache.org/
+
 
 ### Books:
 

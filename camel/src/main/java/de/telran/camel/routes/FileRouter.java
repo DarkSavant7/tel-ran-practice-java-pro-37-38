@@ -8,7 +8,9 @@ public class FileRouter extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         log.info("Start listening for files");
-        from("file://in?delete=true&idempotent=true").log("Transferring ${file:name} and size ${file:size}").to("file://out");
+        from("file://in?delete=true&idempotent=true")
+                .log("Transferring ${file:name} and size ${file:size}")
+                .to("file://out");
 
         from("file://inbox?delete=true")
                 .autoStartup(false)
